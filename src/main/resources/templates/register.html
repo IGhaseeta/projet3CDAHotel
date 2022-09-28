@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+   <!-- basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- mobile metas -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+   <!-- site metas -->
+   <title>Hôtel - Accueil</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- bootstrap css -->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!-- style css -->
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/styleapp.css">
+   <!-- Responsive-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- fevicon -->
+   <link rel="icon" href="images/fevicon.png" type="image/gif" />
+   <!-- Scrollbar Custom CSS -->
+   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+   <!-- Tweaks for older IEs-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+      media="screen">
+   <!--[if lt IE 9]>
+   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+   <!-- loader  -->
+   <div class="loader_bg">
+      <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+   </div>
+   <!-- end loader -->
+   <!-- header -->
+   <header>
+      <!-- header inner -->
+      <div class="header">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                  <div class="full">
+                     <div class="center-desk">
+                        <div class="logo">
+                           <a th:href="@{/index}"><img src="images/logoHotel.png" alt="#" /></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                  <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+                        aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                     <div class="collapse navbar-collapse" id="navbarsExample04">
+                        <ul class="navbar-nav mr-auto">
+                           <li class="nav-item ">
+                              <a class="nav-link" th:href="@{/index}">Home</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" href="about.html">About</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" href="room.html">Our room</a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" href="gallery.html">Gallery</a>
+                           </li>
+                           <li sec:authorize=" !hasRole('USER') && !hasRole('ADMIN')" class="nav-item active">
+                              <a class="nav-link" th:href="@{/register}">Register</a>
+                           </li>
+                           <li sec:authorize=" !hasRole('USER') && !hasRole('ADMIN')" class="nav-item">
+                              <a class="nav-link" th:href="@{/login}">Login</a>
+                           </li>
+
+                           <li sec:authorize=" hasRole('USER')||hasRole('ADMIN')" class=" nav-item">
+                              <a th:href="@{/index}" class="nav-link">
+                                 <span class=" icon icon-user"></span>
+                                 <span class="text" th:text="${connectedUser.firstName}"></span>
+                                 | Mon Compte</a>
+                           </li>
+                           <li sec:authorize="hasRole('USER') || hasRole('ADMIN')" class="nav-item">
+                              <a th:href="@{/logout}" class="nav-link">Déconnexion</a>
+                           </li>
+
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!-- end header inner -->
+   <!-- end header -->
+   <!-- banner -->
+
+   <div class="back_re_app">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="title_app">
+                  <h2>Register</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <div class="contact">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+
+
+
+                     <div class="card">
+                        <div class="card-header">
+                           <h2 class="text-center">Registration</h2>
+                        </div>
+                        <div th:if="${param.success}">
+                           <div class="alert alert-info">
+                              You have successfully registered our app!
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <form method="post" role="form" th:action="@{/register/save}" th:object="${user}">
+                              <div class="form-group mb-3">
+                                 <label class="form-label">First Name</label>
+                                 <input class="form-control" id="firstName" name="firstName"
+                                    placeholder="Enter first name" th:field="*{firstName}" type="text" />
+                                 <p th:errors="*{firstName}" class="text-danger"
+                                    th:if="${#fields.hasErrors('firstName')}"></p>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Last Name</label>
+                                 <input class="form-control" id="lastName" name="lastName" placeholder="Enter last name"
+                                    th:field="*{lastName}" type="text" />
+                                 <p th:errors="*{lastName}" class="text-danger"
+                                    th:if="${#fields.hasErrors('lastName')}"></p>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">phone</label>
+                                 <input class="form-control" id="phone" name="phone" placeholder="Enter phone Numbers"
+                                    th:field="*{phoneNumber}" type="number" />
+                                 <p th:errors="*{phoneNumber}" class="text-danger"
+                                    th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                              </div>
+
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Email</label>
+                                 <input class="form-control" id="email" name="email" placeholder="Enter email address"
+                                    th:field="*{email}" type="email" />
+                                 <p th:errors="*{email}" class="text-danger" th:if="${#fields.hasErrors('email')}"></p>
+                              </div>
+
+
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Password</label>
+                                 <input class="form-control" id="password" name="password" placeholder="Enter password"
+                                    th:field="*{password}" type="password" />
+                                 <p th:errors="*{password}" class="text-danger"
+                                    th:if="${#fields.hasErrors('password')}"></p>
+                              </div>
+
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">N° et nom de la rue </label>
+                                 <input class="form-control" id="LineAdresse" name="LineAdresse"
+                                    placeholder="Enter LineAdresse" th:field="*{LineAdresse}" type="text" />
+                                 <p th:errors="*{LineAdresse}" class="text-danger"
+                                    th:if="${#fields.hasErrors('LineAdresse')}"></p>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Code postal</label>
+                                 <input class="form-control" id="zipCode" name="zipCode" placeholder="Enter zipcode"
+                                    th:field="*{zipCode}" type="number" />
+                                 <p th:errors="*{zipCode}" class="text-danger" th:if="${#fields.hasErrors('zipCode')}">
+                                 </p>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                 <label class="form-label">Ville</label>
+                                 <input class="form-control" id="City" name="City" placeholder="Enter City"
+                                    th:field="*{City}" type="text" />
+                                 <p th:errors="*{City}" class="text-danger" th:if="${#fields.hasErrors('City')}"></p>
+                              </div>
+
+                              <div class="form-group">
+                                 <button class="btn btn-primary" type="submit">Register</button>
+                                 <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- end banner -->
+
+   <!--  footer -->
+   <footer>
+      <div class="footer">
+         <div class="container">
+            <div class="row">
+               <div class=" col-md-4">
+                  <h3>Contact US</h3>
+                  <ul class="conta">
+                     <li><i class="fa fa-map-marker" aria-hidden="true"></i> Address</li>
+                     <li><i class="fa fa-mobile" aria-hidden="true"></i> +01 1234569540</li>
+                     <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> demo@gmail.com</a></li>
+                  </ul>
+               </div>
+               <div class="col-md-4">
+                  <h3>Menu Link</h3>
+                  <ul class="link_menu">
+                     <li class="active"><a href="#">Home</a></li>
+                     <li><a href="about.html"> about</a></li>
+                     <li><a href="room.html">Our Room</a></li>
+                     <li><a href="gallery.html">Gallery</a></li>
+                     <li><a href="blog.html">Blog</a></li>
+                     <li><a href="contact.html">Contact Us</a></li>
+                  </ul>
+               </div>
+               <div class="col-md-4">
+                  <h3>News letter</h3>
+                  <form class="bottom_form">
+                     <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                     <button class="sub_btn">subscribe</button>
+                  </form>
+                  <ul class="social_icon">
+                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                     <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-10 offset-md-1">
+
+                     <p>
+                        © 2023 All Rights Reserved. Design by <a href="https://html.design/"> Free Html Templates</a>
+                        <br><br>
+                        Distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                     </p>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- end footer -->
+   <!-- Javascript files-->
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.bundle.min.js"></script>
+   <script src="js/jquery-3.0.0.min.js"></script>
+   <!-- sidebar -->
+   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="js/custom.js"></script>
+</body>
+
+</html>

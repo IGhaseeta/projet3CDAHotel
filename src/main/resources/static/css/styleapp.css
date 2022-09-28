@@ -1,0 +1,14 @@
+.back_re_app {
+     background-color: #D1D0CE;
+}
+.back_re_app .title_app {
+     text-align: center;
+}
+.back_re_app .title_app h2 {
+color:black;
+font-size: 40px;
+padding: 40px 0;
+font-weight: 600;
+text-transform: uppercase;
+line-height: 35px;
+}
