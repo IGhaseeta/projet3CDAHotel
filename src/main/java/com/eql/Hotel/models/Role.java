@@ -1,6 +1,7 @@
 package com.eql.Hotel.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,8 +16,8 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -28,6 +29,17 @@ public class Role {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+
     @ManyToMany(mappedBy = "roles")
     private List<User> users = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

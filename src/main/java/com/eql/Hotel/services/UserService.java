@@ -8,13 +8,10 @@ import java.util.List;
 
 @Service
 public interface UserService {
-
     void saveUser(UserDto userDto);
 
     User findUserByEmail(String email);
     UserDto mappingUser(User user);
     List<UserDto> findAllUsers();
-
-
 
 }

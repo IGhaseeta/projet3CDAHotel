@@ -1,16 +1,14 @@
 package com.eql.Hotel.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
+
+
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Data
 public class UserDto  {
 
     private Long id;

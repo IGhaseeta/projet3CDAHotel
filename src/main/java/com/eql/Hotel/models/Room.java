@@ -11,33 +11,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "rooms")
 public class Room {
     @Id
-    @Column(name="room-id")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String name;
 
     private String description;
+
     @Lob
+    @Column(columnDefinition = "MEDIUMBLOB") //image de taille medium
     private String image;
 
     private boolean isOccupied;
 
     private double price;
+
+    private boolean isDeleted;
+
+    private boolean isActivated;
 
 
 }

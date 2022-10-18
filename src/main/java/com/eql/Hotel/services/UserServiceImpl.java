@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
         Role role = roleRepository.findByName("ROLE_USER");
         if (role == null)
         {
-            role = checkRoleAdminExist();
+            role = checkRoleUserExist();
         }
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
         return mapToUserDTO(user);
     }
 
-    private Role checkRoleAdminExist() {
+    private Role checkRoleUserExist() {
         Role role = new Role();
         role.setName("ROLE_USER");
         return roleRepository.save(role);

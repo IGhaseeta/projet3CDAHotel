@@ -1,22 +1,22 @@
 package com.eql.Hotel.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class RoomDto {
 
     private Long id;
     private String name;
-    private String ImagePath = "/images/room" + id + ".jpg";
+    private String image;
     private String description;
-
+    private double price;
+    private boolean isOccupied;
+    private boolean isDeleted;
+    private boolean isActivated;
 
 }
